@@ -5,9 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 
 import { CommonModule } from './common/common.module';
+import { JwtModule } from './jwt/jwt.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
-import { JwtModule } from './jwt/jwt.module';
 
 @Module({
   imports: [
@@ -41,7 +41,7 @@ import { JwtModule } from './jwt/jwt.module';
       logging: process.env.NODE_ENV !== 'prod',
       entities: [User],
     }),
-    JwtModule.forRoot(),
+    JwtModule.forRoot({ privateKey: process.env.JWT_SECRET }),
     UsersModule,
     CommonModule,
   ],
