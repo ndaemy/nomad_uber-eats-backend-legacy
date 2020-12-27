@@ -11,4 +11,8 @@ export class JwtService {
   sign(payload: Record<string, unknown>): string {
     return jwt.sign(payload, this.options.privateKey, { expiresIn: '7d' });
   }
+
+  verify(token: string) {
+    return jwt.verify(token, this.options.privateKey);
+  }
 }
